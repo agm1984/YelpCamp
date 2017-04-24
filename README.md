@@ -7,11 +7,7 @@ This is a boilerplate project for a full web app
 -   Body-Parser
 
 ## NPM Scripts
-`n/a`
+`npm start` - starts the server
 
 ## Install
-`npm install`
-
-## To Do
-- [ ] Install Babel
-- [ ] Install ES Lint
+`npm install` - installs dependencies
