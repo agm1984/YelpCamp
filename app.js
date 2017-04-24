@@ -8,6 +8,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Set view template engine
 app.set('view engine', 'ejs');
 
+// Faux DB
+var campgrounds = [
+    { name: "Salmon Creek", image: "https://farm4.staticflickr.com/3872/14435096036_39db8f04bc.jpg" },
+    { name: "Granite Hill", image: "https://farm2.staticflickr.com/1281/4684194306_18ebcdb01c.jpg" },
+    { name: "Mountain Goat's Rest", image: "https://farm8.staticflickr.com/7205/7121863467_eb0aa64193.jpg" }
+];
+
 // Landing Route
 app.get('/', function(req, res) {
     res.render('landing');
@@ -15,17 +22,21 @@ app.get('/', function(req, res) {
 
 // Campground Route
 app.get('/campgrounds', function(req, res) {
-    var campgrounds = [
-        { name: "Salmon Creek", image: "https://farm4.staticflickr.com/3872/14435096036_39db8f04bc.jpg" },
-        { name: "Granite Hill", image: "https://farm2.staticflickr.com/1281/4684194306_18ebcdb01c.jpg" },
-        { name: "Mountain Goat's Rest", image: "https://farm8.staticflickr.com/7205/7121863467_eb0aa64193.jpg" }
-    ];
     res.render('campgrounds', { campgrounds: campgrounds });
 });
 app.post('/campgrounds', function(req, res) {
-    res.send('you hit the campgrounds post');
     // get data from form and add to campgrounds array
+    var name = req.body.name;
+    var image = req.body.image;
+    var newCampground = { name: name, image: image };
+    campgrounds.push(newCampground);
     // redirect back to campgrounds page
+    res.redirect('/campgrounds');
+});
+
+// Campground Adding Route
+app.get('/campgrounds/new', function(req, res) {
+    res.render('new.ejs');
 });
 
 // Server Config
